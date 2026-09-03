@@ -1,3 +1,7 @@
+### EDITED FOR PERSONAL USE
+- alex :P
+
+
 # nix-tmodloader
 
 Run an arbitrary number of tmodloader servers that automatically installs and updates your mods and everything. This is basically just a flake to allow you to host tmodloader servers on nix machines.
@@ -40,4 +44,3 @@ While I'm not new to nix, I'm relatively new to actually using it beyond just ma
 `${tmuxCmd} -d new bash -c "${update script}; ${run terraria script}"`
 
 - [ ] figure out something less hacky for logging. tModLoader wants to write it's logs in it's install directory which happens to be mounted read only. To fix this, I symlink tModLoader-Logs to /tmp and ensure that the files it's going to be writing to have appropriate permissions in ExecStartPre, but this is absolutely not a perfect solution.
-
