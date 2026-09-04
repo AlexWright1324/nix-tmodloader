@@ -70,6 +70,12 @@ in
                   description = "Server package to use";
                 };
 
+                steamcmdPackage = mkOption {
+                  type = types.package;
+                  default = pkgs.steamcmd;
+                  description = "SteamCMD package to use for workshop mod installation";
+                };
+
                 players = mkOption {
                   type = types.ints.u8;
                   default = 255;
@@ -240,7 +246,7 @@ in
           updateWorkshop = pkgs.writeShellApplication {
             name = "tmodloader-${name}-update-workshop";
             runtimeInputs = with pkgs; [
-              steamcmd
+              cfg.steamcmdPackage
               bash
             ];
             text = ''
@@ -250,7 +256,7 @@ in
               # bash ${conf.package}/DedicatedServerUtils/manage-tModLoaderServer.sh \
                 # install-mods \
                 # -f ${escapeShellArg cfg.dataDir}/${name} \
-                # --steamcmdpath ${pkgs.steamcmd}/bin/steamcmd
+                # --steamcmdpath ${cfg.steamcmdPackage}/bin/steamcmd
 
               steamcmd +force_install_dir \
                 ${escapeShellArg cfg.dataDir}/${name} \
